@@ -9,6 +9,7 @@ fun main() {
 
     // null 값 허용하는 법
     var b: Int? = null;
+    var h: Int? = null;
 
     println(a); // 123
     println(d); // 10

@@ -1,4 +1,4 @@
-package com.test.testing.형변환
+package com.test.testing.`2형변환`
 
 fun main(){
     // 형변환
