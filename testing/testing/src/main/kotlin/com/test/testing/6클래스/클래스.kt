@@ -13,7 +13,6 @@ fun main(){
 
 // () 안에 작성은 클래스의 속성을 선언과 동시에 생성자를 생성하는 방법
 class Person (var name:String , var age:Int){
-
     fun introduce (){
         println("${age}세 인 ${name} 입니다")
     }
