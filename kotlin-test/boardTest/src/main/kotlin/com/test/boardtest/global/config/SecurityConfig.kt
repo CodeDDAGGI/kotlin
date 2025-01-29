@@ -1,0 +1,44 @@
+package com.test.boardtest.global.config
+
+import org.springframework.context.annotation.Bean
+import org.springframework.context.annotation.Configuration
+import org.springframework.security.config.annotation.web.builders.HttpSecurity
+import org.springframework.security.config.http.SessionCreationPolicy
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
+import org.springframework.security.crypto.password.PasswordEncoder
+import org.springframework.security.web.SecurityFilterChain
+
+@Configuration
+class SecurityConfig {
+
+    @Bean
+    fun filterChain(http : HttpSecurity): SecurityFilterChain{
+        http
+            .csrf{it.disable()}
+            .headers{it.disable()}
+            .formLogin{it.disable()}
+            .httpBasic{it.disable()}
+            .authorizeHttpRequests{auth ->
+                auth
+                    .requestMatchers(
+                        "/api/v1/users/**",
+                        "/h2-console/**"
+                    ).permitAll()
+                    .anyRequest().authenticated()
+            }
+            .sessionManagement({
+                it.sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+            })
+        return http.build()
+    }
+
+    @Bean // 암호화
+    fun passwordEncoder() : PasswordEncoder = BCryptPasswordEncoder()
+
+    /*
+    * @Bean
+        fun passwordEncoder(): PasswordEncoder {
+            return BCryptPasswordEncoder()
+        }
+    */
+}
