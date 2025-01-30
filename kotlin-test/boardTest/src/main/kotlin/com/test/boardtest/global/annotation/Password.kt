@@ -12,7 +12,7 @@ import kotlin.reflect.KClass
 annotation class Password(
     val message: String = "비밀번호는 8자리 이상, 영문자와 숫자로 구분",
     val groups : Array<KClass<*>> = [],
-    val payload: Array<KClass<out Payload>>
+    val payload: Array<KClass<out Payload>> = []
 )
     class PasswordValidate: ConstraintValidator<Password, String>{
         override fun isValid(

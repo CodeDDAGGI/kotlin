@@ -1,7 +1,7 @@
 package com.test.boardtest.api.controller.dto
 
-data class UserCreateCommend (
+data class UserUpdateCommand (
     val email : String,
-    val password : String,
+    val password : String? = null,
     val name : String
 )
