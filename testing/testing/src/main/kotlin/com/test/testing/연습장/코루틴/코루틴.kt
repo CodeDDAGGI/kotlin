@@ -135,14 +135,56 @@ suspend fun longRunningTask(): String {
 //    println("Hello")
 //}
 
-suspend fun addNumbers(a:Int , b: Int):Int{
-    delay(1000)
-    return a + b
-}
+//suspend fun addNumbers(a:Int , b: Int):Int{
+//    delay(1000)
+//    return a + b
+//}
+//
+//fun main() = runBlocking{
+//    val result = async {
+//        addNumbers(5, 10)
+//    }
+//    println("Result: ${result.await()}")
+//}
+//
+//fun main() = runBlocking {
+//    println("시작!")
+//    val start = System.currentTimeMillis()
+//    coroutineScope {
+//        launch {
+//            delay(3000)
+//            println("코루틴 1 완료")
+//        }
+//
+//        launch {
+//            delay(1500)
+//            println("코루틴 2 완료")
+//        }
+//    }
+//
+//    println("모든 코루틴 완료 후 실행 \n${System.currentTimeMillis() - start}ms")
+//}
 
-fun main() = runBlocking{
-    val result = async {
-        addNumbers(5, 10)
+
+fun main() {
+    println("프로그램 시작")
+
+    runBlocking {
+        println("runBlocking 시작")
+        delay(3000)
+        println("runBlocking 끝")
     }
-    println("Result: ${result.await()}")
+
+    println("runBlocking 이후 실행됨")
+
+    GlobalScope.launch {
+        coroutineScope {
+            println("coroutineScope 시작")
+            delay(3000)
+            println("coroutineScope 끝")
+        }
+    }
+
+    Thread.sleep(3000) // 코루틴이 끝날 때까지 대기 (실제 코드에서는 사용 지양)
+    println("프로그램 종료")
 }
