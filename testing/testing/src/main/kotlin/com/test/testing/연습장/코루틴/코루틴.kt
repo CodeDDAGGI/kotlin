@@ -110,10 +110,10 @@ val customDispatcher = Executors.newFixedThreadPool(3).asCoroutineDispatcher()
 //    println("총 실행 시간 : ${System.currentTimeMillis() - time}ms")
 //}
 
-suspend fun longRunningTask(): String {
-    delay(5000) // 5초 후 완료
-    return "작업 완료!"
-}
+//suspend fun longRunningTask(): String {
+//    delay(5000) // 5초 후 완료
+//    return "작업 완료!"
+//}
 
 //fun main() = runBlocking {
 //    try {
@@ -166,25 +166,32 @@ suspend fun longRunningTask(): String {
 //}
 
 
-fun main() {
-    println("프로그램 시작")
+//fun main() {
+//    println("프로그램 시작")
+//
+//    runBlocking {
+//        println("runBlocking 시작")
+//        delay(3000)
+//        println("runBlocking 끝")
+//    }
+//
+//    println("runBlocking 이후 실행됨")
+//
+//    GlobalScope.launch {
+//        coroutineScope {
+//            println("coroutineScope 시작")
+//            delay(3000)
+//            println("coroutineScope 끝")
+//        }
+//    }
+//
+//    Thread.sleep(3000) // 코루틴이 끝날 때까지 대기 (실제 코드에서는 사용 지양)
+//    println("프로그램 종료")
+//}
 
-    runBlocking {
-        println("runBlocking 시작")
-        delay(3000)
-        println("runBlocking 끝")
+
+fun main(): Unit = runBlocking {
+    launch(Dispatchers.Default) { // 🔥 기본적으로 백그라운드 스레드에서 실행
+        println("Default Dispatcher 실행: ${Thread.currentThread().name}")
     }
-
-    println("runBlocking 이후 실행됨")
-
-    GlobalScope.launch {
-        coroutineScope {
-            println("coroutineScope 시작")
-            delay(3000)
-            println("coroutineScope 끝")
-        }
-    }
-
-    Thread.sleep(3000) // 코루틴이 끝날 때까지 대기 (실제 코드에서는 사용 지양)
-    println("프로그램 종료")
 }
